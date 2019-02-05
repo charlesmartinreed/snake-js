@@ -1,59 +1,97 @@
-console.log("Hello world, from Javascript!")
+// BASIC FUNCTION
+function wordBlanks(myNoun, myAdjective, myVerb, myAdverb) {
+	var result = "";
+	result = "The " + myAdjective + " "  + myNoun + " " + myVerb + " " + myAdverb + "."
 
-//this is an inline comment
 
-/* This is a
-multi-line comment.*/
+	return result
+}
 
-/*
-==========DATA TYPES AND VARIABLES==========
-1. undefined = hasn't been set yet
-2. null = set to be nothing
-3. boolean = true or false
-4. string
-5. symbol = immutable, unique, primitive value
-6. number
-7. object = can store many different key/value pairs
+//SCOPE WITH FUNCTIONS
+var myGlobal = 10; //set outside of function, can be seen within functions
 
-variable names in JS are case sensitive.
-*/
+function fun1() {
+	oopsGlobal = 5; //because the var keyword isn't here, this becomes global! Yikes. I suppose this is why strict mode was created?
+}
 
-var myName = "Charles"; //can be used throughout entire program
-myName = "Tyson";
+function fun2() {
+	var output = "";
 
-let ourName = "Aspira"; //only scoped locally, where it was a defined
-const pi = 3.14; //never changing value
+	if (typeof myGlobal != "undefined") {
+		output += "myGlobal: " + myGlobal;
+	}
 
-var a; //merely creating the variable
-console.log(a);
-var b = 2; //creating and assigning in one step
-a = 7;
-var c = null;
+	if (typeof oopsGlobal != "undefined") {
+		output += " oopsGlobal: " + oopsGlobal;
+	}
 
-console.log(a);
-console.log(b);
-console.log(c);
+	console.log(output);
+}
 
-//Quotes within Quotes and escaping
-var oldStr = "\"Escaping\" is done with the \\ character.";
-var myStr = '"This is valid"';
-var myStr2 = `'This', too is "valid"`;
-var myStr3 = "FirstLine\n\t\\SecondLine\nThirdLine";
+fun1();
+fun2();
 
-console.log(oldStr);
-console.log(myStr);
-console.log(myStr2);
-console.log(myStr3);
+//LOCAL VS GLOBAL SCOPE
+var outerWear = "T-Shirt";
 
-//Working with strings
-var countable = "Count this";
-console.log(countable.length);
+function myOutfit() {
+	var outerWear = "sweater"
+	return outerWear; //using global variable gives T-Shirt, but as soon as we define a variable with the same name, it takes precdence and "sweater is logged".
+}
 
-var firstChar = countable[0];
-console.log(firstChar);
+console.log(myOutfit());
+console.log(outerWear);
 
-var lastChar = countable[countable.length - 1];
-console.log(lastChar);
+console.log(wordBlanks("dog", "big", "ran", "quickly"));
 
-var myStr = "Jello World";
-//myStr[0] = "H"; //This doesn't work because STRINGS ARE IMMUTABLE
+//RETURNING FROM A FUNCTION
+function minusSeven(num) {
+	return num - 7;
+}
+
+var sum = 0;
+console.log(minusSeven(10));
+
+function addFive() {
+	sum += 5; // when we log this func, it returns "undefined" because it doesn't return anything.
+}
+console.log(addFive());
+
+var changed = 0;
+function change(num) {
+	return (num + 5) / 3;
+}
+changed = change(10) //stores the returned value
+console.log(changed) //should be 5
+
+//BASIC ARRAYS
+var ourArray = ["John", 23];
+
+//NESTED ARRAYS
+var myArray = [["the universe", 42], ["everything else", 69]];
+console.log(myArray[0]); //[the universe, 42]
+console.log(myArray[0][1]);
+
+//ARRAYS ARE NOT IMMUTABLE BY DEFAULT
+var mutableArray = [19, 64, 83];
+mutableArray[1] = 49;
+// console.log(mutableArray);
+
+//PUSH, POP
+mutableArray.push([61, 27, 105]);
+// console.log(mutableArray);
+
+var popArray = [1, 2, 3]; //becomes [1, 2] are pop() operation
+var removedFromArray = popArray.pop(); //3
+console.log(popArray)
+
+//SHIFT and UNSHIFT
+//shift removes the first element
+var shiftArray = [4, 5, 6]; //becomes [5, 6]
+var shiftedFromArray = shiftArray.shift(); //4
+console.log(shiftArray)
+
+//unshift adds element to beginning of array
+var unshiftArray = ["b", "c", "d"];
+unshiftArray.unshift("a");
+console.log(unshiftArray);
