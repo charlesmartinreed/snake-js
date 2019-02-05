@@ -1,43 +1,39 @@
-function nextInLine(arr, item) {
-	//this is a queue, so add the item to the end of the array
-	//then, remove the first item on the list and return it
-	arr.push(item);
-	return arr.shift();
-}
-var testArr = [1, 2, 3, 4, 5];
-
-console.log("Before: " + JSON.stringify(testArr));
-console.log(nextInLine(testArr, 6));
-console.log("After: " + JSON.stringify(testArr));
-
-//IF STATEMENTS
-function ourTrueOrFalse(isItTrue) {
-	if (isItTrue) {
-		return "Yes, it's true";
+// IF-ELSE challenge question
+function checkNumber(number) {
+	if (number < 5) {
+		return "Tiny";
+	} else if (number < 10) {
+		return "Small";
+	} else if (number < 15) {
+		return "Medium";
+	} else if (number < 20) {
+		return "Large";
+	} else {
+		return "Huge";
 	}
-	return "No, it's false"
 }
 
-var result = ourTrueOrFalse(5>2); //because Javascript is so damn loose, I can simply evaluate this statement within the arg block
-console.log(result)
+console.log(checkNumber(20));
 
-// == vs ===
-// == uses coercion to attempt to match values, "12" IS EQUAL to 12.
-// ===, the strict equality operator, does NOT use type conversion
-function testEqual(val) {
-	if (val == 12) {
-		return "Equal"
+//write a function to return golf nickname given a stroke count
+var names = ["Hole-in-one!", "Eagle", "Birdie", "Par", "Bogey", "Double Bogey", "Go Home!"]
+
+function golfScore(par, strokes) {
+	if (strokes == 1) {
+		return names[0];
+	} else if (strokes <= par - 2) {
+		return names[1];
+	} else if (strokes == par - 1) {
+		return names[2];
+	} else if (strokes == par) {
+		return names[3];
+	} else if (strokes == par + 1) {
+		return names[4];
+	} else if (strokes == par + 2) {
+		return names[5];
+	} else if (strokes >= par + 3) {
+		return names[6];
 	}
-	return "Not Equal"
 }
 
-console.log(testEqual("12"));
-
-function testStrictEqual(val) {
-	if (val === 12) {
-		return "Equal"
-	}
-	return "Not Equal"
-}
-
-console.log(testStrictEqual("12"));
+console.log(golfScore(5, 4));
