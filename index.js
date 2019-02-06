@@ -1,21 +1,10 @@
-//DEFAULT PARAMETERS
-
-const increment = (function() {
-	//if a particular argument isn't supplied, the default paramater value is used instead
-	return function increment(number, value = 1) {
-		return number + value;
-	};
+//SPREAD OPERATOR - expands an array into its individual parts
+//can only be used in an argument to a function or with an array literal
+const arr1 = ['JAN', 'FEB', 'MAR', 'APR', 'MAY'];
+let arr2;
+(function() {
+	//arr2 = arr1;
+	arr2 = [...arr1]; //arr2 = all the contents of arr1
+	arr1[0] = 'potato'
 })();
-console.log(increment(5, 2)); //7
-console.log(increment(5)); //6
-
-//THE REST OPERATOR - CREATE VARIADIC FUNCTIONS
-const sum = (function() {
-	// return function sum(x, y, z) { //becomes
-	return function sum(...args) { //everything passed in is converted to an array
-		//const args = [x, y, z]; //not necessary with rest operator, ...args
-		return args.reduce((a, b) => a + b, 0);
-	};
-}());
-
-console.log(sum(1, 2, 3, 4, 5)); //15
+console.log(arr2);
