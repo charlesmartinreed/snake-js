@@ -1,38 +1,31 @@
-//NESTED TERNARIES
+//const is "read only"
+// function printManyTimes(str) {
+// 	"use strict";
+//
+// 	const SENTENCE = str + " is cool!"; //common practice is all caps for const
+//
+// 	SENTENCE = str + " is amazing!" //invalid! "Assignment to constant variable"
+//
+// 	for(let i = 0; i < str.length; i+=2) {
+// 		console.log(SENTENCE);
+// 	}
+// }
 
-function checkSign(num) {
-	return num > 0 ? "positive" : num < 0 ? "negative" : "zero";
-}
+//printManyTimes("freeCodeCamp");
 
-console.log(checkSign(-10));
-console.log(checkSign(20));
-console.log(checkSign(0));
-
-// VAR vs LET
-let catName = "Quincy";
-let quote;
-
-//let catName = "Beau"; //valid with var, not valid with let
-
-function catTalk() {
-	"use strict"; //catches common coding mistakes and invalid actions
-
-	catName = "Oliver";
-	quote = catName = " says Meow!";
-}
-
-catTalk();
-
-//scope of let is limited to function or block statement it was declared
-function checkScope() {
+//however, you can still mutate individual elements of a const array
+const s = [5, 7, 2];
+function editInPlace() {
 	"use strict";
-	let i = "function scope";
-	if (true) {
-		let i = "block scope"; //using var here would make i block scope in this block AND the function body
-		console.log("scope of i is: ", i);
-	}
-	console.log("scope of i is: ", i);
-	return i;
+
+	//s = [2, 5, 7]; //invalid
+
+	//valid
+	s[0] = 2;
+	s[1] = 5;
+	s[2] = 7;
+
+	return s
 }
 
-checkScope();
+console.log(editInPlace());
