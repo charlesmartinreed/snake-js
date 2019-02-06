@@ -1,18 +1,19 @@
-//MATHS
+//parse int takes a string and returns an integer. If conversion not possible, NaN is returned
 
-function randomFraction() {
-
-
-	return Math.random(); //returns a number between 0 and 1, non-inclusive
-
+function convertToInt(str) {
+	return parseInt(str);
 }
 
-var randomWholeNumber = Math.floor(Math.random() * 20); //between 0 and 19
-
-function generateRandomNumberinRange(ourMin, ourMax) {
- 	return Math.floor(Math.random() * (ourMax - ourMin + 1)) + ourMin;
+//radix can be used to change the base value - base-10, base-2, base-8, etc.
+function convertFromBinary(str) {
+	return parseInt(str, 2); //the second param indicates the base to convert FROM
 }
 
-console.log(randomFraction());
-console.log(randomWholeNumber);
-console.log(generateRandomNumberinRange(1, 9));
+
+
+let value = convertToInt("9");
+let value2 = convertFromBinary("10011"); //19
+
+console.log(value);
+console.log(value2);
+console.log(value3);
