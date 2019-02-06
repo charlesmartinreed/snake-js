@@ -1,42 +1,57 @@
-/*
-CARD COUNTING FUNC
+//BUILDING OBJECTS
+//properties can be any data type in Javascript.
+var ourDog = {
+	"name": "Camper",
+	"legs": 4,
+	"tails": 1,
+	"friends": ["Everything!"]
+};
 
-LOW CARD = COUNT++
-HIGH CARD = COUNT--
-MIDDLE VALUE CARD = COUNT STAYS SAME
+var testObj = {
+	"an entree": "hamburger",
+	"my side": "veggies",
+	"the drink": "water"
+};
 
-*/
+//access values with either dot-notation or bracket-notation.
+//bracket-notation required if the value name has a space.
+console.log(ourDog.name);
+ourDog.name = "Happy Camper";
+console.log(ourDog.name);
 
-var count = 0;
+ourDog.human = "Charles";
+console.log(ourDog["human"]);
+console.log(ourDog["legs"]);
+console.log(testObj["an entree"]);
 
-function cc(card) {
-	//when count positive, player should bet high. when negative, player should bet low.
-	switch (card) {
-		case 2:
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-			count++;
-			break;
-		case 10:
-		case "J":
-		case "Q":
-		case "K":
-		case "A":
-			count--;
-			break;
+//variables can also be used to search values in an object
+var players = {
+	12: "Namath",
+	16: "Montana",
+	19: "Unitas"
+};
+
+var playerNumber = 16;
+var player = players[playerNumber];
+console.log(player) //gives us Montana
+
+// USE THE DELETE keyword to remove elements from an object
+delete players[12];
+console.log(JSON.stringify(players));
+
+//CHECK FOR OBJECT PROPERTIES WITH hasOwnProperty method
+var newObj = {
+	gift: "pony",
+	pet: "kitten",
+	bed: "sleigh"
+};
+
+function checkObj(checkProp) {
+	if (newObj.hasOwnProperty(checkProp)) { //hasOwnProperty returns true or false
+		return newObj[checkProp];
+	} else {
+		return "Not Found";
 	}
-	//var holdOrBet = "Hold";
-
-//ternary
-	// if (count > 0) {
-	// 	holdOrBet = "Bet"
-	// }
-
-	var holdOrBet = count > 0 ? "Bet" : "Hold";
-	return count + " " + holdOrBet;
 }
 
-cc(2); cc("K"); cc(7); cc("3"); cc("4"); //-2 Hold
-console.log(cc(4)) //-1 Hold
+console.log(checkObj("pet"));
