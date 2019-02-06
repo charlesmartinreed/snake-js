@@ -1,60 +1,43 @@
-//WHILE LOOPS
-
+//DO-WHILE - always runs at least once BEFORE checking conditional
 var myArray = [];
+var i = 10;
 
-var i = 0;
-while (i < 5) {
+do {
 	myArray.push(i);
 	i++;
-}
+} while (i < 5);
 
-console.log(myArray);
+console.log(i, myArray); //since i is never less than 5, i is only incremented once.
 
-//FOR LOOPS
-var ourArray = [];
+// ===========================================================================
 
-for (var i = 0; i < 5; i++) {
-	//initialization, conditional, increment/decrement
-	ourArray.push(i);
-}
-console.log(ourArray);
+// PROFILE LOOKUP CHALLENGE
+var contacts = [
+	{
+		"firstName": "Akira",
+		"lastName": "Laine",
+		"number": "1234567890",
+		"likes": ["Pizza", "Coding", "Brownie Poitns"]
+	},
+	{
+		"firstName": "Harry",
+		"lastName": "Potter",
+		"number": "1525938182",
+		"likes": ["Hogwarts", "Magic", "Hagrid"]
+	}
+];
 
-//FOR LOOP, ODD NUMBERS
-var oddArray = [];
-for (var i=1; i < 10; i += 2) {
-	oddArray.push(i);
-}
-console.log(oddArray);
-
-//BACKWARDS FOR LOOPS
-var backwardsArray = [];
-for (var i = 10; i > 0; i--) {
-	backwardsArray.push(i);
-}
-console.log(backwardsArray);
-
-//iterate through array contents
-var anotherArray = [9, 10, 11, 12];
-var ourTotal = 0;
-
-for (var i = 0; i < anotherArray.length; i++) {
-	ourTotal += anotherArray[i]; //add to the total at each step
-}
-
-console.log(ourTotal) //42
-
-//NESTED FOR LOOPS - factorial problem
-function multiplyAll(arr) {
-	var product = 1;
-
-	for (var i=0; i < arr.length; i++) { //3
-		for (var j=0; j < arr[i].length; j++) {
-			product *= arr[i][j]; // at step 1, 1x1x2
+function lookupProfile(name, prop) {
+	//user passes in a name and prop, we return the value
+	for (var i = 0; i < contacts.length; i++) {
+		//check if the name exists
+		if (contacts[i].firstName === name) {
+			return contacts[i][prop] || "No such property"
+		} else {
+			return "No such contact"
 		}
 	}
-
-	return product;
 }
 
-var product = multiplyAll([[1,2],[3,4],[5,6,7]]);
-console.log(product);
+var data = lookupProfile("Akira", "dislikes");
+console.log(data);
