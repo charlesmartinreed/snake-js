@@ -1,22 +1,21 @@
-//HIGHER ORDER FUNCTIONS, map, order and reduce
-//these take functions as arguments
+//DEFAULT PARAMETERS
 
-const realNumberArray = [4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2];
+const increment = (function() {
+	//if a particular argument isn't supplied, the default paramater value is used instead
+	return function increment(number, value = 1) {
+		return number + value;
+	};
+})();
+console.log(increment(5, 2)); //7
+console.log(increment(5)); //6
 
-const squareList = (arr) => {
-	//compute squares of only positive integers - FILTER using arrow func
-	const squaredIntegers = arr.filter(num => Number.isInteger(num) && num > 0).map(x => x * x);
-	//result is array with only integers that are greater than 0 and squared
-	return squaredIntegers;
-}
+//THE REST OPERATOR - CREATE VARIADIC FUNCTIONS
+const sum = (function() {
+	// return function sum(x, y, z) { //becomes
+	return function sum(...args) { //everything passed in is converted to an array
+		//const args = [x, y, z]; //not necessary with rest operator, ...args
+		return args.reduce((a, b) => a + b, 0);
+	};
+}());
 
-const squaredIntegers = squareList(realNumberArray); //16, 1764, 36
-console.log(squaredIntegers);
-
-const names = ["Charleston", "David", "Brandice", "Michael"];
-
-const filterNames = (name) => {
-	const filtered = name.filter( value => value.length > 5);
-	return filtered;
-}
-console.log(filterNames(names)); //Charleston, Brandice, Michael
+console.log(sum(1, 2, 3, 4, 5)); //15
