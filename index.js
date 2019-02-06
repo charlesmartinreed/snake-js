@@ -71,42 +71,27 @@ var collection = {
 			"Let It Rock",
 			"You Give Love a Bad Name"
 		]
+	},
+	"5439": {
+		"album": "ABBA Gold"
 	}
 };
 
 var collectionCopy = JSON.parse(JSON.stringify(collection));
 
 function updateRecords(id, prop, value) {
-	//console.log(JSON.stringify(collection[id]));
-	var item = collection[id];
-
-	if (collection.hasOwnProperty(id)) {
-		if (value == undefined) {
-			//delete item[prop]
-			delete collection[id][prop];
-		}
-
-		if (prop == "tracks") {
-			if (item.hasOwnProperty("tracks")) {
-				let array = collection[id]["tracks"];
-				array.push(value)
-			} else {
-				item[prop] = values
-			}
-		}
-
-		item[prop] = value;
-		return collection
-
+	//if we pass in blank value, delete the prop
+	if (value === "") {
+		delete collection[id][prop];
+	} else if (prop === "tracks") {
+		//if it doesn't already exist, make an empty array
+		collection[id][prop] = collection[id][prop] || [];
+		collection[id][prop].push(value);
 	} else {
-		// create a new album
-		collection[id] = {
-			prop: value
-		};
-		return collection
+		collection[id][prop] = value;
 	}
-
+	return collection;
 }
 
-let updatedCollection = updateRecords("5007", "album", "Symphonia");
-console.log(JSON.stringify(updatedCollection));
+console.log(updateRecords(5439, "artist", "ABBA"));
+updateRecords(2548, "tracks", "test");
