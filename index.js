@@ -1,57 +1,112 @@
-//BUILDING OBJECTS
-//properties can be any data type in Javascript.
-var ourDog = {
-	"name": "Camper",
-	"legs": 4,
-	"tails": 1,
-	"friends": ["Everything!"]
-};
+//myMusic is an array containing an object, which itself contains an array
 
-var testObj = {
-	"an entree": "hamburger",
-	"my side": "veggies",
-	"the drink": "water"
-};
-
-//access values with either dot-notation or bracket-notation.
-//bracket-notation required if the value name has a space.
-console.log(ourDog.name);
-ourDog.name = "Happy Camper";
-console.log(ourDog.name);
-
-ourDog.human = "Charles";
-console.log(ourDog["human"]);
-console.log(ourDog["legs"]);
-console.log(testObj["an entree"]);
-
-//variables can also be used to search values in an object
-var players = {
-	12: "Namath",
-	16: "Montana",
-	19: "Unitas"
-};
-
-var playerNumber = 16;
-var player = players[playerNumber];
-console.log(player) //gives us Montana
-
-// USE THE DELETE keyword to remove elements from an object
-delete players[12];
-console.log(JSON.stringify(players));
-
-//CHECK FOR OBJECT PROPERTIES WITH hasOwnProperty method
-var newObj = {
-	gift: "pony",
-	pet: "kitten",
-	bed: "sleigh"
-};
-
-function checkObj(checkProp) {
-	if (newObj.hasOwnProperty(checkProp)) { //hasOwnProperty returns true or false
-		return newObj[checkProp];
-	} else {
-		return "Not Found";
+var myMusic = [
+	{
+		"artist": "Billy Joel",
+		"title": "Piano Man",
+		"release_year": 1973,
+		"formats": [
+			"CD",
+			"8T",
+			"LP"
+		],
+		"gold": true
+	},
+	{
+		"artist": "Beau Carnes",
+		"title": "Cereal Man",
+		"release_year": 2003,
+		"formats": [
+			"youtube-video"
+		],
+		"gold": false
 	}
+]
+
+//accessing values in a nested object
+var myStorage = {
+	"car": {
+		"inside": {
+			"glove box": "maps",
+			"passenger seat": "crumbs"
+		},
+		"outside": {
+			"trunk": "jack"
+		}
+	}
+};
+
+//remember that we use bracket notation when the value name has spaces
+var gloveBoxContents = myStorage.car.inside["glove box"];
+console.log(gloveBoxContents);
+
+var myPlants = [
+	{
+		type: "flowers",
+		list: [
+			"rose",
+			"tulip",
+			"dandelion"
+		]
+	},
+	{
+		type: "trees",
+		list: [
+			"fir",
+			"pine",
+			"birch"
+		]
+	}
+];
+
+var secondTree = myPlants[1].list[1];
+console.log(secondTree); //"pine"
+
+//updating objects challenge
+var collection = {
+	"2548": {
+		"album": "Slippery When Wet",
+		"artist": "Bon Jovi",
+		"tracks": [
+			"Let It Rock",
+			"You Give Love a Bad Name"
+		]
+	}
+};
+
+var collectionCopy = JSON.parse(JSON.stringify(collection));
+
+function updateRecords(id, prop, value) {
+	//console.log(JSON.stringify(collection[id]));
+	var item = collection[id];
+
+	if (collection.hasOwnProperty(id)) {
+		if (value == undefined) {
+			//delete item[prop]
+			delete collection[id][prop];
+		}
+
+		if (prop == "tracks") {
+			if (item.hasOwnProperty("tracks")) {
+				let array = collection[id]["tracks"];
+				array.push(value)
+			} else {
+				item[prop] = values
+			}
+		}
+
+		item[prop] = value;
+		return collection
+
+	} else {
+		// create a new album
+		collection[id] = {
+			prop: value
+		};
+		return collection
+	}
+
 }
 
-console.log(checkObj("pet"));
+let updatedCollection = updateRecords("5007", "album", "Symphonia");
+console.log(JSON.stringify(updatedCollection));
