@@ -1,63 +1,42 @@
-//switch uses STRICT EQUALITY CHECKING, ===
-function caseInSwitch(val) {
-	var answer = "";
-	switch (val) {
-			case 1:
-				answer = "alpha";
-				break;
-			case 2:
-				answer = "beta";
-				break;
-			case 3:
-				answer = "gamma";
-				break;
-			case 4:·
-				answer = "delta";
-				break;
-			default:
-				answer = "Invalid selection";
-				break;
-	}
+/*
+CARD COUNTING FUNC
 
-	return answer;
-}
+LOW CARD = COUNT++
+HIGH CARD = COUNT--
+MIDDLE VALUE CARD = COUNT STAYS SAME
 
-console.log(caseInSwitch(5));
+*/
 
-function sequentialSizes(val) {
-	var answer = "";
-	switch (val) {
-		case 1:
+var count = 0;
+
+function cc(card) {
+	//when count positive, player should bet high. when negative, player should bet low.
+	switch (card) {
 		case 2:
 		case 3:
-			answer = "Low";
-			break;
 		case 4:
 		case 5:
 		case 6:
-			answer = "Mid";
+			count++;
 			break;
-		case 7:
-		case 8:
-		case 9:
-			answer = "High";
+		case 10:
+		case "J":
+		case "Q":
+		case "K":
+		case "A":
+			count--;
 			break;
 	}
-	return answer;
+	//var holdOrBet = "Hold";
+
+//ternary
+	// if (count > 0) {
+	// 	holdOrBet = "Bet"
+	// }
+
+	var holdOrBet = count > 0 ? "Bet" : "Hold";
+	return count + " " + holdOrBet;
 }
 
-console.log(sequentialSizes(8));
-
-function isLess(a, b) {
-	return a < b
-}
-
-console.log(isLess(20, 5));
-
-//return early from a function
-function abTest(a, b) {
-	if (a < 0 || b < 0) {
-		return undefined;
-	}
-}
-console.log(abTest(-2, 2));
+cc(2); cc("K"); cc(7); cc("3"); cc("4"); //-2 Hold
+console.log(cc(4)) //-1 Hold
