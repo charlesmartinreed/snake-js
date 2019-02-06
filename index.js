@@ -1,22 +1,23 @@
-function freezeObj() {
-	"use strict";
+/*
+var magic = function() {
+	return new Date();
+};
+*/
 
-	//create this constant - can currently be changed
-	const MATH_CONSTANTS = {
-		PI: 3.14
-	};
+//CAN BE CONVERTED INTO ARROW FUNCTIONS
+var magic = () => {
+	return new Date();
+};
 
-	Object.freeze(MATH_CONSTANTS); //prevents mutation of const objects and arrays - makes MATH_CONSTANTS a "read only"
+//THIS CAN BE SHORTENED EVEN FURTHER
+const MAGIC_CONCISE = () => new Date();
 
-	try {
-		MATH_CONSTANTS.PI = 99;
-	} catch(ex) {
-		console.log(ex); //if this doesn't work, return this exception
-	}
-	//otherwise, return the altered PI
-	return MATH_CONSTANTS.PI;
-}
+//ARROW FUNCTIONS, LIKE REGULAR FUNCTIONS, CAN ACCEPT ARGUMENTS
+var myConcat = function(arr1, arr2) {
+	return arr1.concat(arr2);
+};
 
-const PI = freezeObj();
+const CONCAT_CONCISE = (arr1, arr2) => arr1.concat(arr2);
 
-console.log(PI);
+console.log(myConcat([1, 2], [3, 4, 5]));
+console.log(CONCAT_CONCISE([1, 2], [3, 4, 5]));
